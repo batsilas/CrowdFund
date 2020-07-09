@@ -1,0 +1,85 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CrowdStart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/country/dist/css/countrySelect.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+
+    <script src="https://kit.fontawesome.com/0cde2950cb.js" crossorigin="anonymous"></script>
+    <link href="~/css/Site.css" rel="stylesheet">
+
+
+    @*<link href="~/css/navbar.css" rel="stylesheet">*@
+
+
+</head>
+<body>
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+            <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                <img src="~/images/CrowdFund(Trans)1.png" alt="CrowdFund Logo" width="160px" height="45px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09"
+                    aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample09">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link font-weight-light" asp-area="Customer" asp-controller="Home" asp-action="Index"><b>Home</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Customer" asp-action="ShowAll" asp-controller="Project">Show All Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Customer" asp-action="Trending" asp-controller="Project">Trends</a>
+                    </li>
+
+                </ul>
+
+                <form method="get" class="form-inline my-2 my-md-0" asp-area="Customer" asp-action="Search" asp-controller="Project">
+
+                    <input type="search" placeholder="Search Project" name="searchType" class="form-control" />
+
+                </form>
+
+
+                <partial name="_LoginPartial" />
+            </div>
+
+
+        </nav>
+    </div>
+    <br />
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <br />
+
+    <footer class="container">
+        &copy; 2020 - CrowdStart - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/country/dist/js/countrySelect.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

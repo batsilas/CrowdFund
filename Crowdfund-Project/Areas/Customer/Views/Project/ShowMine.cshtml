@@ -1,0 +1,77 @@
+﻿@model IEnumerable<CrowFund.Core.Models.Project>
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tenali+Ramakrishna&display=swap" rel="stylesheet">
+
+@if (Model.Any())
+{
+    <div class="container">
+        <div class="row">
+            @foreach (var project in Model)
+            {
+                <div class="col-sm-4">
+                    <div class="card mb-4">
+                        <a asp-action="Details" asp-area="Customer" asp-controller="Project" asp-route-id="@project.ProjectId">
+                            <img src="@project.ImageUrl" class="card-img-top" alt="..."></a>
+
+                            <div class="card-body">
+                                <a asp-action="Details" asp-area="Customer" asp-controller="Project" asp-route-id="@project.ProjectId">
+                                    <h5 class="card-title project-title">
+                                        @project.Title
+                                    </h5>
+                                </a>
+                                <p class="card-text project-description">@project.Description</p>
+                            </div>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <span class="project-current-fund project-fund-color">
+                                        €@project.CurrentFund pledged
+                                    </span>
+                                    <div class="pb3 pt3 px3-sm px4">
+                                        <div class="project-description text-muted type-13 mr2 dark-grey-500 medium" data-test-id="percent-raised">
+                                            @if (project.CurrentFund != 0)
+                                            {
+                                                @(((project.CurrentFund / project.TargetFund) * 100).ToString("#.##"))
+                                            }
+                                            else
+                                            {
+                                                @((Convert.ToInt32(project.CurrentFund)).ToString())
+                                            }
+                                            %
+                                            <span class="ml1 normal">funded</span>
+                                        </div>
+                                        <div class="project-description text-muted type-13 ksr_page_timer mb3 mr2 dark-grey-500 medium" data-end_time="1593144000000" data-test-id="time-left">
+                                            <span class="js-num">@project.DateCreated.ToShortDateString()</span>
+
+                                        </div>
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+
+                                    <div class="progress" style="height: 3px;">
+                                        <div class="progress-bar" role="progressbar" style="width: @(((project.CurrentFund/project.TargetFund)*100))%;" aria-valuenow=@(((project.CurrentFund/project.TargetFund)*100).ToString("#.##")) aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item" style="text-align:center;">
+
+                                    <a asp-action="Upsert" asp-area="Customer" asp-controller="Project" asp-route-id="@project.ProjectId">Edit</a>
+                                </li>
+                            </ul>
+
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+
+}
+else
+{
+    <p> No Projects Available</p>
+}
+
+

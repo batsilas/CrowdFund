@@ -1,0 +1,138 @@
+﻿<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&display=swap" rel="stylesheet"> <div class="row">
+    <div class="col ">
+
+        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="10000">
+                    <a class="nav-link CarouselLink" asp-controller="Project"
+                       asp-action="Upsert">
+                        <img src="~/images/products_364475.jpg"
+                             class="d-block w-100 carousel-img" alt="...">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+
+                        <a class="nav-link CarouselLink" asp-controller="Project"
+                           asp-action="Upsert">
+                            <h3>
+                                Create Your Project
+                            </h3>
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-item carousel-img" data-interval="2000">
+                    <a class="nav-link CarouselLink" asp-controller="Project"
+                       asp-action="ShowAll">
+                        <img src="~/images/Women-money-1128580989_383843.jpg"
+                             class="d-block w-100 carousel-img" alt="...">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="nav-link CarouselLink" asp-controller="Project"
+                           asp-action="ShowAll">
+                            <h3>Fund A Project</h3>
+                        </a>
+                    </div>
+                </div>
+                <div class="carousel-item ">
+                    <a class="nav-link CarouselLink" asp-controller="Project"
+                       asp-action="Trending">
+                        <img src="~/images/trends.jpg" class="d-block w-100 carousel-img"
+                             alt="...">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <a class="nav-link CarouselLink" asp-controller="Project"
+                           asp-action="Trending">
+                            <h3>Trends</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <div class="col ">
+
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<div class="row">
+    <div class="col ">
+        <div class="card ">
+            <div class="card-header category-title font-weight-bold">
+                <a method="get" asp-area="Customer" asp-controller="Project"
+                   asp-action="ShowByCategory" asp-route-cat="@CrowFund.Core.StaticData.Category.Technology">
+                    <center>Technology</center>
+                </a>
+
+            </div>
+            <a method="get" asp-area="Customer" asp-controller="Project"
+               asp-action="ShowByCategory" asp-route-cat="@CrowFund.Core.StaticData.Category.Technology">
+                <img src="~/images/healthcare_tech_fund_secondary-min.png" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title category-description ">Our technology forces us to live mythically</h5>
+                <p class="card-text project-description text-muted">
+                    Technology, the application of scientific knowledge to the practical aims of human life or,
+                    as it is sometimes phrased, to the change and manipulation of the human environment.Technology can be the knowledge
+                    of techniques, processes and tools.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col ">
+        <div class="card ">
+            <div class="card-header category-title font-weight-bold">
+                <a method="get" asp-area="Customer" asp-controller="Project"
+                   asp-action="ShowByCategory" asp-route-cat="@CrowFund.Core.StaticData.Category.Art">
+                    <center>Art</center>
+                </a>
+
+            </div>
+            <a method="get" asp-area="Customer" asp-controller="Project"
+               asp-action="ShowByCategory" asp-route-cat="@CrowFund.Core.StaticData.Category.Art">
+                <img src="~/images/golden-elephant-painting.jpg" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title category-description ">The art of a people is a true mirror to their minds</h5>
+                <p class="card-text project-description text-muted">
+                    Art is a diverse range of human activities in creating visual, auditory or performing artifacts,
+                    expressing the author's imaginative,
+                    conceptual ideas, or technical skill, intended to be appreciated for their beauty or emotional power.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col ">
+        <div class="card ">
+            <div class="card-header category-title font-weight-bold">
+                <a method="get" asp-area="Customer" asp-controller="Project"
+                   asp-action="ShowByCategory" asp-route-cat="@CrowFund.Core.StaticData.Category.Games">
+                    <center>Games</center>
+                </a>
+            </div>
+            <a method="get" asp-area="Customer" asp-controller="Project"
+               asp-action="ShowByCategory" asp-route-cat="@CrowFund.Core.StaticData.Category.Games">
+                <img src="~/images/popular_dota2.jpg" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title category-description ">Reality is broken. Game designers can fix it</h5>
+                <p class="card-text project-description text-muted">
+                    A game is a structured form of play, usually undertaken for entertainment or fun,
+                    and sometimes used as an educational tool.
+                    Games are distinct from work, which is usually carried out for remuneration,
+                    and from art, which is more often an expression of aesthetic or ideological elements.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

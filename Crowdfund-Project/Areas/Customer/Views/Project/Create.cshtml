@@ -1,0 +1,102 @@
+﻿<div class="jumbotron">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row p-3 border">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-12 border-bottom">
+                <h2 class="text-primary">New Project</h2>
+            </div>
+            <div class="col-8 pt-4">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label >Title</label>
+                    </div>
+                    <div class="col-8">
+                        <input  class="form-control" placeholder="Type Title" />
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label >Goal Price</label>
+                    </div>
+                    <div class="col-8">
+                        <input class="form-control" placeholder="Type Price" />
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label >Start Date</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="date" class="form-control" />
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label >End Date</label>
+                    </div>
+                    <div class="col-8">
+                        <input type="date" class="form-control" placeholder="Type Price" />
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        Category
+                    </div>
+                    <div class="col-8">
+                        <select class="form-control" placeholder="Choose Category">
+                            <option>Choose Category</option>
+                        </select>
+                        <span  class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label>Description</label>
+                    </div>
+                    <div class="col-8">
+                        <textarea class="form-control" placeholder="Type Description"></textarea>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        Image
+                    </div>
+                    <div class="col-8">
+                        <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Create</button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

@@ -1,0 +1,187 @@
+﻿@model CrowFund.Core.ViewModels.TrendingViewModel
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tenali+Ramakrishna&display=swap" rel="stylesheet">
+
+<h3> Choose below the most popular projects:</h3>
+&nbsp
+
+<!----------------------    Based On Button    ---------------------------->
+<div class="dropdown js-trends-dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Based On
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item js-fundsReceived-item" href="#">Funds Received</a>
+        <a class="dropdown-item js-numOfFunders-item" href="#">Number Of Fundings</a>
+        <a class="dropdown-item js-trendsByCategory-item" href="#">Category</a>
+
+    </div>
+</div>
+
+
+<!---------------------     Category Selection Button     ------------------>
+
+<select id="CategoriesSelect" class="form-control mt-2 js-category-selection-btn col-md-2">
+
+    @foreach (var item in Enum.GetValues(typeof(CrowFund.Core.StaticData.Category))) {
+        //                    <span data-category-id="@item" id="@item"></span>
+
+        <option id="@item">@item</option>
+    }
+</select>
+</div>
+
+<span id="allCategories">
+
+    <span id="Art2" style="display:none">
+        @Html.Partial("ByCategoryProjects", Model.GetTrendsByFunds.ToList().Where(u => u.Category == CrowFund.Core.StaticData.Category.Art).ToList());
+    </span>
+    <span id="Technology2" style="display:none">
+        @Html.Partial("ByCategoryProjects", Model.GetTrendsByFunds.ToList().Where(u => u.Category == CrowFund.Core.StaticData.Category.Technology).ToList());
+    </span>
+    <span id="Games2" style="display:none">
+        @Html.Partial("ByCategoryProjects", Model.GetTrendsByFunds.ToList().Where(u => u.Category == CrowFund.Core.StaticData.Category.Games).ToList());
+    </span>
+
+</span>
+    <!-----------------     Sort Projects By Funds Received     ------------------->
+
+    @if (Model.GetTrendsByFunds.Any()) {
+        <div class="container js-funds-trending">
+            <div class="row">
+                @foreach (var project in Model.GetTrendsByFunds) {
+                    <div class="col-sm-4">
+                        <div class="card mb-4">
+                            <a asp-action="Details" asp-area="Customer" asp-controller="Project" asp-route-id="@project.ProjectId">
+                                <img src="@project.ImageUrl" class="card-img-top" alt="...">
+
+                                <div class="card-body">
+                                    <h5 class="card-title project-title">
+                                        @project.Title
+                                    </h5>
+                                    <p class="card-text project-description">@project.Description</p>
+                                </div>
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <span class="project-current-fund project-fund-color">
+                                            €@project.CurrentFund pledged
+                                        </span>
+                                        <div class="pb3 pt3 px3-sm px4">
+                                            <div class="project-description text-muted type-13 mr2 dark-grey-500 medium" data-test-id="percent-raised">
+                                                <span>
+                                                    @if (project.CurrentFund != 0) {
+                                                        @(((project.CurrentFund / project.TargetFund) * 100).ToString("#.##"))
+                                                    }
+                                                    else {
+                                                        @((Convert.ToInt32(project.CurrentFund)).ToString())
+                                                    }
+                                                    %
+                                                </span>
+                                                <span class="ml1 normal">funded</span>
+                                            </div>
+                                            <div class="project-description text-muted type-13 ksr_page_timer mb3 mr2 dark-grey-500 medium" data-end_time="1593144000000" data-test-id="time-left">
+                                                <span class="js-num">@project.DateCreated.ToShortDateString()</span>
+
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+
+                                        <div class="progress" style="height: 3px;">
+                                            <div class="progress-bar" role="progressbar" style="width: @(((project.CurrentFund / project.TargetFund) * 100))%;" aria-valuenow=@(((project.CurrentFund / project.TargetFund) * 100).ToString("#.##")) aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" style="text-align:center;">
+
+                                        <a asp-action="Details" asp-area="Customer" asp-controller="Project" asp-route-id="@project.ProjectId">View Details</a>
+                                    </li>
+                                </ul>
+                                </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+    else {
+        <p> No Projects Available</p>
+    }
+
+
+    <!--            Sort Projects By Number of Funders              -->
+
+    @if (Model.GetTrendsByFunders.Any()) {
+        <div class="container js-funders-trending">
+            <div class="row">
+                @foreach (var project in Model.GetTrendsByFunders) {
+                    <div class="col-sm-4">
+                        <div class="card mb-4">
+                            <img src="@project.ImageUrl" class="card-img-top" alt="...">
+
+                            <div class="card-body">
+                                <h5 class="card-title project-title">
+                                    @project.Title
+                                </h5>
+                                <p class="card-text project-description">@project.Description</p>
+                            </div>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <span class="project-current-fund project-fund-color">
+                                        €@project.CurrentFund pledged
+                                    </span>
+                                    <div class="pb3 pt3 px3-sm px4">
+                                        <div class="project-description text-muted type-13 mr2 dark-grey-500 medium" data-test-id="percent-raised">
+                                            <span>
+                                                @if (project.CurrentFund != 0) {
+                                                    @(((project.CurrentFund / project.TargetFund) * 100).ToString("#.##"))
+                                                }
+                                                else {
+                                                    @((Convert.ToInt32(project.CurrentFund)).ToString())
+                                                }
+                                                %
+                                            </span>
+                                            <span class="ml1 normal">funded</span>
+                                        </div>
+                                        <div class="project-description text-muted type-13 ksr_page_timer mb3 mr2 dark-grey-500 medium" data-end_time="1593144000000" data-test-id="time-left">
+                                            <span class="js-num">@project.DateCreated.ToShortDateString()</span>
+
+                                        </div>
+
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+
+                                    <div class="progress" style="height: 3px;">
+                                        <div class="progress-bar" role="progressbar" style="width: @(((project.CurrentFund / project.TargetFund) * 100))%;" aria-valuenow=@(((project.CurrentFund / project.TargetFund) * 100).ToString("#.##")) aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item" style="text-align:center;">
+
+                                    <a asp-action="Details" asp-area="Customer" asp-controller="Project" asp-route-id="@project.ProjectId">View Details</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+    else {
+        <p> No Projects Available</p>
+    }
+
+
+
+
+

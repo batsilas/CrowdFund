@@ -1,0 +1,118 @@
+@model CrowFund.Core.Models.Project
+
+
+<span><b>Project : @Model.Title</b></span>
+
+<br />
+<br />
+
+
+<div class="row ">
+    <div class="col-9">
+        <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-interval="10000">
+                    <img src="https://www.incimages.com/uploaded_files/image/970x450/products_364475.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+        <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="home" aria-selected="true">Description</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Images</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Details</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="home-tab">
+                <div class="card text-center">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Here is the descriptions of project</h5>
+                        <p class="card-text">@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="card text-center">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Images and Videos about project</h5>
+                        <p class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="card text-center">
+
+                    <div class="card-body">
+                        <h5 class="card-title">More details</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @if (Model.FundingPackages.Any()) {
+
+        <div class="col-3">
+
+            
+            <span id="project_id" data-Project-id="@Model.ProjectId"></span>
+
+
+            @foreach (var fd in Model.FundingPackages) {
+
+                <span class="fund_id mt-2" data-Funding-id="@fd.FundingPackageId"></span>
+                <div class="card">
+                    <img src="@Model.ImageUrl" width="100% class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@fd.Name</h5>
+                        <p class="card-text">@fd.Description</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@fd.Price $</li>
+                    </ul>
+                    <div class="card-body">
+                        <center>
+                            <button type="button" data-Funding-id="@fd.FundingPackageId" class="btn btn-success mt-2 @fd.FundingPackageId fund-button"> Submit</button>
+                        </center>
+                    </div>
+
+                </div>
+
+            }
+
+
+        </div>
+    }
+    else {
+        <div class="col-3">
+            No Funding Packages Available
+        </div>
+    }
+
+
+
+
+
+
